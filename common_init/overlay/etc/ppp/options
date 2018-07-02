@@ -1,0 +1,7 @@
+115200 crtscts
+noauth
+usepeerdns
+defaultroute
+nodetach
+lcp-echo-failure 3
+lcp-echo-interval 5
