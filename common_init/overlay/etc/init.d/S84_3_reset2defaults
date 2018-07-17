@@ -1,8 +1,0 @@
-#!/bin/sh
-
-name="reset2defaults"
-cmd="/etc/init.d/reset2defaults.sh"
-dir="/"
-user=""
-
-source /etc/init.d/template_process.inc.sh
