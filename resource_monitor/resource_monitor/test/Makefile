@@ -1,11 +1,13 @@
-TARGET=run_metrics_daemon_test
+TARGET=run_resource_monitor_test
 
 SOURCES= \
-	run_metrics_daemon_test.cc
+	run_resource_monitor_test.cc
+
+RESMON_A = ../src/resource_monitor.a
 
 LIBS= \
 	-ljson-c -luv -lnanomsg -lsbp -lpiksi -ldl -lpthread -lgtest \
-	../src/metrics_daemon.a
+	$(RESMON_A)
 
 CFLAGS=-std=gnu++11 -z muldefs -I../src
 
@@ -16,7 +18,7 @@ CC=$(CROSS)g++
 all: program
 program: $(TARGET)
 
-$(TARGET): $(SOURCES)
+$(TARGET): $(SOURCES) $(RESMON_A)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES) $(LIBS)
 
 clean:

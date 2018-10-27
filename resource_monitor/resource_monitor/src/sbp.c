@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Swift Navigation Inc.
+ * Copyright (C) 2018 Swift Navigation Inc.
  * Contact: Swift Navigation <dev@swiftnav.com>
  *
  * This source is subject to the license found in the file 'LICENSE' which must
@@ -10,15 +10,16 @@
  * WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#include <libpiksi/sbp_pubsub.h>
-#include <libpiksi/loop.h>
-#include <libpiksi/logging.h>
 #include <uv.h>
+
+#include <libpiksi/logging.h>
+#include <libpiksi/loop.h>
+#include <libpiksi/sbp_pubsub.h>
 
 #include "sbp.h"
 
-#define SBP_SUB_ENDPOINT "ipc:///var/run/sockets/external.pub" /* SBP External Out */
-#define SBP_PUB_ENDPOINT "ipc:///var/run/sockets/external.sub" /* SBP External In */
+#define SBP_SUB_ENDPOINT "ipc:///var/run/sockets/internal.pub"
+#define SBP_PUB_ENDPOINT "ipc:///var/run/sockets/internal.sub"
 
 static uv_timer_t *uv_timer = NULL;
 
@@ -36,6 +37,7 @@ static void signal_cb(pk_loop_t *pk_loop, void *handle, void *context)
 {
   (void)handle;
   (void)context;
+
   piksi_log(LOG_DEBUG, "Received interrupt! Exiting...");
   pk_loop_stop(pk_loop);
 }
@@ -43,6 +45,9 @@ static void signal_cb(pk_loop_t *pk_loop, void *handle, void *context)
 bool sbp_update_timer_interval(unsigned int timer_interval, pk_loop_cb callback)
 {
   if (uv_timer != NULL) pk_loop_remove_handle(uv_timer);
+  uv_timer = NULL;
+
+  if (timer_interval == 0) return true;
 
   uv_timer = pk_loop_timer_add(ctx.loop, timer_interval, callback, NULL);
 
@@ -50,6 +55,7 @@ bool sbp_update_timer_interval(unsigned int timer_interval, pk_loop_cb callback)
     piksi_log(LOG_ERR, "Error adding timer!");
     return false;
   }
+
   return true;
 }
 
@@ -65,8 +71,10 @@ int sbp_init(unsigned int timer_interval, pk_loop_cb callback)
     goto failure;
   }
 
-  if (!sbp_update_timer_interval(timer_interval, callback)) {
-    goto failure;
+  if (timer_interval != 0) {
+    if (!sbp_update_timer_interval(timer_interval, callback)) {
+      goto failure;
+    }
   }
 
   ctx.pubsub_ctx = sbp_pubsub_create(SBP_PUB_ENDPOINT, SBP_SUB_ENDPOINT);
@@ -90,11 +98,11 @@ int sbp_init(unsigned int timer_interval, pk_loop_cb callback)
     goto failure;
   }
 
-  return 0;
+  return true;
 
 failure:
   sbp_deinit();
-  return -1;
+  return false;
 }
 
 void sbp_deinit(void)
@@ -113,6 +121,11 @@ void sbp_deinit(void)
 settings_ctx_t *sbp_get_settings_ctx(void)
 {
   return ctx.settings_ctx;
+}
+
+sbp_tx_ctx_t *sbp_get_tx_ctx(void)
+{
+  return sbp_pubsub_tx_ctx_get(ctx.pubsub_ctx);
 }
 
 int sbp_callback_register(u16 msg_type, sbp_msg_callback_t cb, void *context)

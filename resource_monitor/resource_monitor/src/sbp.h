@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Swift Navigation Inc.
+ * Copyright (C) 2018 Swift Navigation Inc.
  * Contact: Swift Navigation <dev@swiftnav.com>
  *
  * This source is subject to the license found in the file 'LICENSE' which must
@@ -16,18 +16,17 @@
 #include <libsbp/sbp.h>
 #include <libpiksi/settings.h>
 
-#define TIME_SOURCE_MASK 0x07 /* Bits 0-2 */
-#define NO_TIME 0
+typedef struct sbp_tx_ctx_s sbp_tx_ctx_t;
 
 int sbp_init(unsigned int timer_interval, pk_loop_cb callback);
 void sbp_deinit(void);
 
 settings_ctx_t *sbp_get_settings_ctx(void);
-pk_loop_t *sbp_get_loop(void);
+sbp_tx_ctx_t *sbp_get_tx_ctx(void);
 
 int sbp_callback_register(u16 msg_type, sbp_msg_callback_t cb, void *context);
 bool sbp_update_timer_interval(unsigned int timer_interval, pk_loop_cb callback);
 
 int sbp_run(void);
 
-#endif /* SWIFTNAV_SBP_H */
+#endif
