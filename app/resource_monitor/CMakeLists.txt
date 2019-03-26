@@ -28,6 +28,7 @@ target_link_libraries(
 		sbp
     m
     ${LIBUV}
+    ${CMAKE_THREAD_LIBS_INIT}
 		)
 
 install(
@@ -36,17 +37,17 @@ install(
     )
 
 install(
-    PROGRAMS init.d/S99resource_monitor
+    PROGRAMS overlay/etc/init.d/S99resource_monitor
     DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/init.d
     )
 
 install(
-    FILES sudoers.d/resource_monitor
+    FILES overlay/etc/sudoers.d/resource_monitor
     DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/sudoers.d
     )
 
 install(
-  PROGRAMS sv/resource_monitor_runsvdir/run
+  PROGRAMS overlay/etc/sv/resource_monitor_runsvdir/run
   DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/sv/resource_monitor_runsvdir
   )
 

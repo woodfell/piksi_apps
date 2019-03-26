@@ -26,7 +26,7 @@ install(
     )
 
 install(
-    FILES overlay/etc/init.d/sudoers.d/standalone_file_logger
+    FILES overlay/etc/sudoers.d/standalone_file_logger
     DESTINATION ${CMAKE_INSTALL_FULL_SYSCONFDIR}/sudoers.d
     )
 

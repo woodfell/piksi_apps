@@ -17,6 +17,7 @@ target_link_libraries(
     settings
 		sbp
     ${LIBUV}
+    ${CMAKE_THREAD_LIBS_INIT}
 		)
 
 set(FLUSH_SRCS
@@ -36,6 +37,7 @@ target_link_libraries(
     settings
     sbp
     ${LIBUV}
+    ${CMAKE_THREAD_LIBS_INIT}
     )
 
 install(

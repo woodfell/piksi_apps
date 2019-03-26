@@ -21,6 +21,7 @@ target_link_libraries(
     json-c
     settings
     ${LIBUV}
+    ${CMAKE_THREAD_LIBS_INIT}
 		)
 
 install(
