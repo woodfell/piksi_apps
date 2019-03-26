@@ -1,0 +1,5 @@
+add_subdirectory(libnmea_protocol)
+add_subdirectory(librtcm3_in_protocol)
+add_subdirectory(librtcm3_out_protocol)
+add_subdirectory(libsbp_protocol)
+

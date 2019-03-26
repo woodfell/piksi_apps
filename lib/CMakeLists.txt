@@ -1,0 +1,3 @@
+add_subdirectory(libnetwork)
+add_subdirectory(libpiksi)
+add_subdirectory(libfactorydata)

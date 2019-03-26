@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.10)
+
+project (piksi_apps C)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(GNUInstallDirs)
+include(FindDependency)
+
+if(CMAKE_CROSSCOMPILING)
+  message(STATUS "Skipping unit tests because we are cross compiling")
+else()
+  message(STATUS "Enabling unit tests")
+  if (EXISTS ${CMAKE_SOURCE_DIR}/third_party/googletest/googletest/CMakeLists.txt)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/third_party/googletest/googletest)
+    set(GTEST_BOTH_LIBRARIES gtest)
+  else()
+    find_package(GTest REQUIRED)
+  endif()
+  enable_testing()
+  set(BUILD_UNIT_TESTS TRUE)
+endif()
+
+FindDependency(TARGET rtcm SUBDIR third_party/librtcm/c CHECK_TARGET REQUIRED LIBS librtcm.so)
+FindDependency(TARGET swiftnav CHECK_TARGET REQUIRED LIBS libswiftnav.so)
+FindDependency(TARGET sbp SUBDIR third_party/libsbp/c CHECK_TARGET REQUIRED LIBS libsbp.so)
+FindDependency(TARGET settings CHECK_TARGET REQUIRED LIBS libsettings.so)
+FindDependency(TARGET gnss_converters SUBDIR third_party/gnss-converters/c CHECK_TARGET REQUIRED LIBS libgnss_converters.so)
+
+find_library(LIBUV NAMES libuv.so PATHS /usr/local/lib)
+find_library(LIBJSONC NAMES libjson-c.so PATHS /usr/local/lib)
+find_package(Threads REQUIRED)
+
+add_subdirectory(lib)
+add_subdirectory(protocol)
+add_subdirectory(app)

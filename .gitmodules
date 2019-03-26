@@ -1,0 +1,18 @@
+[submodule "third_party/gnss-converters"]
+	path = third_party/gnss-converters
+	url = git@github.com:swift-nav/gnss-converters.git
+[submodule "third_party/librtcm"]
+	path = third_party/librtcm
+	url = git@github.com:swift-nav/librtcm.git
+[submodule "third_party/libsbp"]
+	path = third_party/libsbp
+	url = git@github.com:swift-nav/libsbp.git
+[submodule "third_party/libsettings"]
+	path = third_party/libsettings
+	url = git@github.com:swift-nav/libsettings.git
+[submodule "third_party/libswiftnav"]
+	path = third_party/libswiftnav
+	url = git@github.com:swift-nav/libswiftnav.git
+[submodule "third_party/googletest"]
+	path = third_party/googletest
+	url = https://github.com/google/googletest.git
