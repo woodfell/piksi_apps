@@ -73,7 +73,7 @@ if (BUILD_UNIT_TESTS)
       dl
       ${CMAKE_THREAD_LIBS_INIT}
       ${LIBUV}
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
   target_link_libraries(resource_monitor_tests PRIVATE "-z muldefs")
 

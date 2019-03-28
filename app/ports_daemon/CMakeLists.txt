@@ -77,7 +77,7 @@ if (BUILD_UNIT_TESTS)
       socketcan
       ${CMAKE_THREAD_LIBS_INIT}
       ${LIBUV}
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
   target_link_libraries(ports_daemon_tests PRIVATE "-z muldefs")
 

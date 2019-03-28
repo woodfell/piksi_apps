@@ -57,7 +57,7 @@ if (BUILD_UNIT_TESTS AND UNIT_TESTS_ARE_BROKEN_DO_NOT_COMPILE)
       sbp
       settings
       ${LIBJSONC}
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
   target_link_libraries(metrics_daemon_tests PRIVATE "-z muldefs")
 

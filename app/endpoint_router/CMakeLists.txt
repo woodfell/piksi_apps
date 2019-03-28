@@ -53,7 +53,7 @@ if (BUILD_UNIT_TESTS)
       settings
       cmph
       ${LIBUV}
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
   target_link_libraries(endpoint_router_tests PRIVATE "-z muldefs")
 

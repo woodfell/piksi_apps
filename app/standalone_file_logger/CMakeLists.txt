@@ -50,7 +50,7 @@ if (BUILD_UNIT_TESTS)
       piksi
       ${CMAKE_THREAD_LIBS_INIT}
       ${LIBUV}
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
   target_link_libraries(standalone_file_logger_tests PRIVATE "-z muldefs")
 

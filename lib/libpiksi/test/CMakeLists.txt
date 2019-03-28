@@ -27,7 +27,7 @@ target_link_libraries(
     settings
     ${CMAKE_THREAD_LIBS_INIT}
     ${LIBUV}
-    ${GTEST_BOTH_LIBRARIES}
+    gtest
     )
 
 add_test(
@@ -55,7 +55,7 @@ target_link_libraries(
     settings
     ${CMAKE_THREAD_LIBS_INIT}
     ${LIBUV}
-    ${GTEST_BOTH_LIBRARIES}
+    gtest
     )
 
 add_test(

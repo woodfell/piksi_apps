@@ -43,7 +43,7 @@ if (BUILD_UNIT_TESTS)
   target_link_libraries(
       sbp_settings_daemon_tests
       piksi
-      ${GTEST_BOTH_LIBRARIES}
+      gtest
       )
 
   add_test(
