@@ -31,8 +31,22 @@ target_link_libraries(
     ${CMAKE_THREAD_LIBS_INIT}
 		)
 
+add_executable(
+    extrace
+    extrace.c
+    )
+
+target_link_libraries(
+    extrace
+    piksi
+    settings
+    sbp
+    m
+    ${LIBUV}
+    )
+
 install(
-    TARGETS resource_monitor
+    TARGETS resource_monitor extrace
     DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
     )
 

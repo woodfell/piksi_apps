@@ -16,7 +16,7 @@ target_link_libraries(
 
 install(
     TARGETS nmea_protocol
-    DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}
+    DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/endpoint_protocols
     )
 
 install(

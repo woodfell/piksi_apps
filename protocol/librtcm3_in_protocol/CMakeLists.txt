@@ -17,7 +17,7 @@ target_link_libraries(
 
 install(
     TARGETS rtcm3_in_protocol
-    DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}
+    DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/endpoint_protocols
     )
 
 install(

@@ -25,6 +25,14 @@ find_library(LIBUV NAMES libuv.so PATHS /usr/local/lib)
 find_library(LIBJSONC NAMES libjson-c.so PATHS /usr/local/lib)
 find_package(Threads REQUIRED)
 
+if(CMAKE_CROSSCOMPILING)
+  add_custom_target(
+      rootfs-overlay
+      COMMAND env BUILD_DIR=${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR}/scripts/make-rootfs-overlay.sh
+      )
+endif()
+
 add_subdirectory(lib)
 add_subdirectory(protocol)
 add_subdirectory(app)
+

@@ -1,4 +1,4 @@
-project (endpoint_adaptor)
+project (endpoint_adapter)
 
 set(SRCS
 	endpoint_adapter.c
@@ -12,12 +12,12 @@ set(SRCS
 	)
 
 add_executable(
-		endpoint_adaptor
+		endpoint_adapter
 		${SRCS}
 		)
 
 target_link_libraries(
-		endpoint_adaptor
+		endpoint_adapter
     piksi
     settings
 		sbp
@@ -26,6 +26,6 @@ target_link_libraries(
 		)
 
 install(
-    TARGETS endpoint_adaptor
+    TARGETS endpoint_adapter
     DESTINATION ${CMAKE_INSTALL_FULL_BINDIR}
     )
